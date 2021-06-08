@@ -1,35 +1,35 @@
-#Create an API Gateway and microservice using NestJS TypeScript.
+# Create an API Gateway and microservice using NestJS TypeScript.
 <p>A simple gateway connecting services. Nothing Fancy just the necessities.</p>
 
 
-##Make project directory
+## Make project directory
 ```shell
 mkdir nest-test-api-gateway
 
 cd nest-test-api-gatewy
 ```
-##Install nestjs/cli tools
+## Install nestjs/cli tools
 ```shell
 yarn global add @nestjs/cli
 ```
 
-##Create new nest project called service-a
+## Create new nest project called service-a
 ```shell
 nest new service-a
 
 cd service-a/
 ```
-##Remove unneeded test files (optional)
+## Remove unneeded test files (optional)
 ```shell
 rm ./src/app.controller.spec.ts ./src/app.service.ts
 ```
 
-##Install nest micro service packages
+## Install nest micro service packages
 ```shell
 yarn add @nestjs/microservices
 ```
 
-##Update main.ts to use microservice 
+## Update main.ts to use microservice
 >./service-a/src/main.ts
 ```javascript
 import { NestFactory } from '@nestjs/core';
@@ -52,7 +52,7 @@ async function bootstrap() {
 bootstrap();
 
 ```
-##Update App controller to use microservice 
+## Update App controller to use microservice
 >./service-a/src/app.controller.ts
 ```javascript
 import { Controller } from "@nestjs/common";
@@ -68,22 +68,22 @@ export class AppController {
   }
 }
 ```
-##create api gateway for services
+## create api gateway for services
 ```shell
 cd ../
 
 nest new api-gateway && cd api-gateway
 ```
-##Remove unneeded test file(optional)
+## Remove unneeded test file(optional)
 ```shell
 rm ./src/app.controller.spec.ts
 ```
-##Install nest micro service packages
+## Install nest micro service packages
 ```shell
 yarn add @nestjs/microservices
 ```
 
-##Register the microservice with App module 
+## Register the microservice with App module
 >./api-gateway/src/app.module.ts
 ```javascript
 @Module({
@@ -103,7 +103,7 @@ yarn add @nestjs/microservices
   providers: [AppService]
 })
 ```
-##Update api gateway app service to use microservice 
+## Update api gateway app service to use microservice
 >./api-gateway/src/app.service.ts
 ```javascript
 import { Injectable, Inject } from '@nestjs/common';
@@ -128,7 +128,7 @@ export class AppService {
   }
 }
 ```
-##Update the @Get decorator in api-gateway app controller to handle the new service
+## Update the @Get decorator in api-gateway app controller to handle the new service
 >./api-gateway/src/app.controller.ts
 ```javascript
 @Get('/ping-a')
@@ -136,4 +136,3 @@ export class AppService {
     return this.appService.pingServiceA();
   }
 ```
-
